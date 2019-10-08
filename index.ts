@@ -22,7 +22,24 @@ command.handler = async () => {
   const source = git('.');
   const config = new Config();
 
-  const result = await source.run(['diff', '--name-only', 'HEAD', 'ORIG_HEAD']);
+  let prev;
+  const revs = await source.run(['rev-list', '-n', '2', '--all']);
+  if (!revs) {
+    log.warn('The repository does not have any commits yet.');
+    return;
+  }
+
+  switch (revs.split('\n').length) {
+    case 1:
+      // Git empty tree hash
+      prev = '4b825dc642cb6eb9a060e54bf8d69288fbee4904';
+      break;
+
+    case 2:
+      prev = 'ORIG_HEAD';
+  }
+
+  const result = await source.run(['diff', '--name-only', 'HEAD', prev]);
   log.info('Found changed files: \n' + result);
 
   const files = result.split("\n");
