@@ -1,0 +1,52 @@
+{
+  "name": "@gitsync/post-merge-command",
+  "version": "0.2.0",
+  "description": "A git hook, use to sync the commits to relative repositories after merge.",
+  "keywords": [
+    "gitsync",
+    "post-merge",
+    "command"
+  ],
+  "author": "twinh <twinhuang@qq.com>",
+  "homepage": "https://github.com/twinh/gitsync#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twinh/gitsync.git"
+  },
+  "scripts": {
+    "build": "yarn clean && tsc",
+    "clean": "rimraf dist coverage",
+    "test": "jest",
+    "prepare": "yarn build"
+  },
+  "bugs": {
+    "url": "https://github.com/twinh/gitsync/issues"
+  },
+  "dependencies": {
+    "@gitsync/commit-command": "^0.2.0",
+    "@gitsync/sync": "^0.2.0"
+  },
+  "devDependencies": {
+    "@gitsync/test": "^0.2.0",
+    "@types/jest": "^24.0.18",
+    "coveralls": "^3.0.6",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
+  },
+  "ciDependencies": {
+    "@gitsync/commit-command": "gitsync-pkg/gitsync-commit-command",
+    "@gitsync/sync": "gitsync-pkg/gitsync-sync",
+    "@gitsync/test": "gitsync-pkg/gitsync-test",
+    "@gitsync/config": "gitsync-pkg/gitsync-config",
+    "@gitsync/log": "gitsync-pkg/gitsync-log"
+  }
+}
