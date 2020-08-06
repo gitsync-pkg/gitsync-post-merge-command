@@ -13,7 +13,7 @@ command.command = 'post-merge';
 
 command.describe = 'A git hook, use to sync the commits to relative repositories after merge.';
 
-command.handler = async () => {
+command.handler = async (argv) => {
   if (process.env.GITSYNC_UPDATE) {
     log.info('Gitsync is updating commit, skipping post merge.');
     return;
